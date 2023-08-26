@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
-{% import "bootstrap/wtf.html" as wtf %}
-
 <head>
     <meta charset="utf-8">
-    <title>Sign Up</title>
+    <title>Welcome!</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <!-- Google Web Fonts -->
@@ -61,18 +59,12 @@
                     <div class="row align-items-center g-5">
                         <div class="col-lg-6 text-center text-lg-start">
                             <h1 class="display-3 text-white animated slideInLeft">
-                                Sign Up
+                                Hello!
                             </h1>
                             <div>
-                                <form method="POST" action="/signup">
-	                        	    {{ form.hidden_tag() }}<br>
-		                            {{ wtf.form_field(form.username) }}<br>
-	                            	{{ wtf.form_field(form.email) }}<br>
-	                            	{{ wtf.form_field(form.password) }}<br>
-	                    	        <button class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft" type="submit">Sign Up</button>
-	                            </form>
+                                <h2 class="text-white animated slideInLeft">New user has been successfully created. Welcome!</h2>
+                                <a class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft" href="{{ url_for('login') }}">Log In</a>
                             </div>
-
                         </div>
                         <div class="col-lg-6 text-center text-lg-end overflow-hidden">
                             <img class="img-fluid" src="{{ url_for('static', filename='img/hero.png') }}">
