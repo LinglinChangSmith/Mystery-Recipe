@@ -1,0 +1,58 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+{{ super() }}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block title %}
+Go Taste Buds
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<h1>My Mystery Recipe</h1>
+	<h2>You will be making: {{ title }}</h2>
+
+	{% if preparation < 60: %}
+		<h3>Ready in {{ preparation }} minutes</h3>
+	{% elif preparation == 60: %}
+		<h3>Ready in 1 hour</h3>
+	{% elif preparation > 60 and preparation < 120: %}
+		<h3>Ready in less than 2 hours</h3>
+	{% else: %}
+		<h3>It takes longer than 2 hours but sooooo worth it</h3>
+	{% endif %}
+
+	{% if servings == 1: %}
+		<h3>Will make {{ servings }} serving</h3>
+	{% else: %}
+		<h3>Will make {{ servings }} servings</h3>
+	{% endif %}
+
+	{% if diets == []: %}
+		<h3>This recipe does not have a special diet type</h3>
+	{% else: %}
+		<h3>This recipe is:</h3>
+		{% for diet in diets: %}
+			<p> 👉 {{ diet }}</p>
+		{% endfor %}
+	{% endif %}
+
+	{% if dishes == []: %}
+		<h3>This will be a delicious dish to add to your table today</h3>
+	{% else: %}
+		<h3>This will be a delicious:</h3>
+		{% for dish in dishes: %}
+			<p> 👉 {{ dish }}</p>
+		{% endfor %}
+	{% endif %}
+	<h3>Now check me out here: <a href="{{ link }}">{{ link }}</a></h3>
+</div>
+
+<div class="container">
+	<a href="{{ url_for('dashboard') }}" class="btn">Back to dashboard</a>
+</div>
+
+
+{% endblock %}

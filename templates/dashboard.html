@@ -49,10 +49,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0 pe-4">
-                        <a href="{{ url_for('home') }}" class="nav-item nav-link active">Home</a>
-                        <a href="{{ url_for('login') }}" class="nav-item nav-link">Mystery Box</a>
-                        <a href="{{ url_for('login') }}" class="nav-item nav-link">My Recipes</a>
-                        <a href="{{ url_for('login') }}" class="nav-item nav-link">Food Joke</a>
+                        <a href="{{ url_for('dashboard') }}" class="nav-item nav-link active">Home</a>
+                        <a href="{{ url_for('my_recipes') }}" class="nav-item nav-link">My Recipes</a>
+                        <a href="{{ url_for('joke') }}" class="nav-item nav-link">Food Joke</a>
+                        <a href="{{ url_for('home') }}" class="nav-item nav-link">Log Out</a>
+
                     </div>
                 </div>
             </nav>
@@ -61,16 +62,11 @@
                 <div class="container my-5 py-5">
                     <div class="row align-items-center g-5">
                         <div class="col-lg-6 text-center text-lg-start">
-                            <h1 class="display-3 text-white animated slideInLeft">
-                                Hello, xxx
-                            </h1>
-                            <p class="text-white animated slideInLeft mb-4 pb-2">
-                                Tired of your ordinary diet?<br>
-                                Feeling a little adventurous?<br>
-                                Come open your mystery recipe box now!
-                            </p>
-                            <a href="{{ url_for('signup') }}" class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">Sign Up</a>
-                            <a href="{{ url_for('login') }}" class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">Log In</a>
+                            <h1 class="display-3 text-white animated slideInLeft">Hello, {{ name }}</h1>
+                            <h2 class="text-white animated slideInLeft mb-4 pb-2">
+                                Looks like you are ready for your adventure. Let's see what you will be making today.
+                            </h2>
+                            <a href="{{ url_for('random_recipe') }}" class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">Open Mystery Box</a>
                         </div>
                         <div class="col-lg-6 text-center text-lg-end overflow-hidden">
                             <img class="img-fluid" src="{{ url_for('static', filename='img/hero.png') }}">
@@ -80,25 +76,6 @@
             </div>
         </div>
         <!-- Navbar & Hero End -->
-
-
-        <!-- About Start -->
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="row g-5 align-items-center">
-                    <div class="col-lg-10">
-                        <h5 class="section-title ff-secondary text-start text-primary fw-normal">About our Recipes</h5>
-                        <h1 class="mb-4">Welcome to Mystery Recipe</h1>
-                        <p class="mb-4">We have over 5000 recipes from all over the world. Like we promised, your taste buds will travel.</p>
-                        <p class="mb-4">Our recipies are marked with diet types and dietary intolerances so nobody get hurt.</p>
-                        <p class="mb-4">On a budget? No worries! Our recipies will let you know how much you'll need to spend.</p>
-                        <p class="mb-4">Our recipies show you the time needed so you can plan ahead.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- About End -->
-
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">

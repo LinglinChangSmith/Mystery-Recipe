@@ -1,0 +1,30 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+{{ super() }}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block title %}
+My Oh My
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<h1>My Favorite Recipes</h1>
+</div>
+
+<div class="container recipe_list">
+    {% for recipe_data in all_recipe_data: %}
+    <a href="{{ recipe_data.recipe_link }}">{{ recipe_data.recipe_name }}</a>
+    <a class="btn" href="{{ url_for('delete', id=recipe_data.id) }}">Delete</a>
+    <a class="btn" href="{{ url_for('update', id=recipe_data.id) }}">My Note</a>
+    <br>
+    {% endfor %}
+</div>
+
+<div class="container">
+	<a href="{{ url_for('dashboard') }}" class="btn">Back to dashboard</a>
+</div>
+{% endblock %}
