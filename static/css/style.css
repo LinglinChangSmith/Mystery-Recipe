@@ -477,3 +477,8 @@
     padding-right: 0;
     border-right: none;
 }
+
+h2 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
