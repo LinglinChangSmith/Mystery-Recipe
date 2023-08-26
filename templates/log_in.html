@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+{% import "bootstrap/wtf.html" as wtf %}
+
 <head>
     <meta charset="utf-8">
     <title>Log In</title>
@@ -58,9 +60,15 @@
                 <div class="container my-5 py-5">
                     <div class="row align-items-center g-5">
                         <div class="col-lg-6 text-center text-lg-start">
-                            <h1 class="display-3 text-white animated slideInLeft">
-                                Log In
-                            </h1>
+                            <h1 class="display-3 text-white animated slideInLeft">Log In</h1>
+                            <div>
+                                <form method="POST" action="/login">
+	                            	{{ form.hidden_tag() }}<br>
+	                            	{{ wtf.form_field(form.username) }}<br>
+	                            	{{ wtf.form_field(form.password) }}<br>
+		                            <button class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft" type="submit">Log In</button>
+	                            </form>
+                            </div>
                         </div>
                         <div class="col-lg-6 text-center text-lg-end overflow-hidden">
                             <img class="img-fluid" src="{{ url_for('static', filename='img/hero.png') }}">
