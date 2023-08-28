@@ -173,12 +173,12 @@ def update(id):
     return render_template('my_note.html', form=form, note_to_update=note_to_update, name=name)
 
 
-@app.route("/joke")
-def joke():
-    response = api.get_a_random_food_joke()
+@app.route("/trivia")
+def trivia():
+    response = api.get_random_food_trivia()
     data = response.json()
-    random_joke = data["text"]
-    return render_template("food_joke.html", joke=random_joke)
+    random_trivia = data["text"]
+    return render_template("food_trivia.html", trivia=random_trivia)
 
 
 if __name__ == "__main__":
