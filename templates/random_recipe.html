@@ -1,58 +1,156 @@
-{% extends 'bootstrap/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block styles %}
-{{ super() }}
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-{% endblock %}
+<head>
+    <meta charset="utf-8">
+    <title>Taa Daa</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-{% block title %}
-Go Taste Buds
-{% endblock %}
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
 
-{% block content %}
-<div class="container">
-	<h1>My Mystery Recipe</h1>
-	<h2>You will be making: {{ title }}</h2>
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-	{% if preparation < 60: %}
-		<h3>Ready in {{ preparation }} minutes</h3>
-	{% elif preparation == 60: %}
-		<h3>Ready in 1 hour</h3>
-	{% elif preparation > 60 and preparation < 120: %}
-		<h3>Ready in less than 2 hours</h3>
-	{% else: %}
-		<h3>It takes longer than 2 hours but sooooo worth it</h3>
-	{% endif %}
+    <!-- Libraries Stylesheet -->
+	<link href="{{ url_for('static', filename='lib/animate/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />
 
-	{% if servings == 1: %}
-		<h3>Will make {{ servings }} serving</h3>
-	{% else: %}
-		<h3>Will make {{ servings }} servings</h3>
-	{% endif %}
+    <!-- Customized Bootstrap Stylesheet -->
+	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
 
-	{% if diets == []: %}
-		<h3>This recipe does not have a special diet type</h3>
-	{% else: %}
-		<h3>This recipe is:</h3>
-		{% for diet in diets: %}
-			<p> 👉 {{ diet }}</p>
-		{% endfor %}
-	{% endif %}
+	<!-- Template Stylesheet -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
 
-	{% if dishes == []: %}
-		<h3>This will be a delicious dish to add to your table today</h3>
-	{% else: %}
-		<h3>This will be a delicious:</h3>
-		{% for dish in dishes: %}
-			<p> 👉 {{ dish }}</p>
-		{% endfor %}
-	{% endif %}
-	<h3>Now check me out here: <a href="{{ link }}">{{ link }}</a></h3>
-</div>
-
-<div class="container">
-	<a href="{{ url_for('dashboard') }}" class="btn">Back to dashboard</a>
-</div>
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
 
 
-{% endblock %}
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
+                <a href="" class="navbar-brand p-0">
+                    <h1 class="text-primary m-0"><i class="fa fa-utensils me-3"></i>Mystery Recipe</h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0 pe-4">
+                        <a href="{{ url_for('dashboard') }}" class="nav-item nav-link">Home</a>
+                        <a href="{{ url_for('random_recipe') }}" class="nav-item nav-link active">Mystery Box</a>
+                        <a href="{{ url_for('my_recipes') }}" class="nav-item nav-link">My Recipes</a>
+                        <a href="{{ url_for('trivia') }}" class="nav-item nav-link">Food Trivia</a>
+                        <a href="{{ url_for('home') }}" class="nav-item nav-link">Log Out</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl py-5 bg-dark hero-header mb-5">
+                <div class="container text-center my-5 pt-5 pb-4">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Mystery Box</h1>
+                    <nav aria-label="breadcrumb">
+                        <h4 class="text-white mb-3 animated slideInDown">
+                            Your mystery recipe box is opened. Exciting!
+                        </h4>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+        <!-- Recipe Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">Mystery Box</h5>
+                    <h2 class="mb-4">You'll be making...</h2>
+                    <h3 class="mb-4">{{ title }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6">
+                        <div class="row g-4 mb-4">
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">{{ servings }}</h1>
+                                    <div class="ps-4">
+                                        <h6 class="text-uppercase mb-0">Servings</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">{{ preparation }}</h1>
+                                    <div class="ps-4">
+                                        <h6 class="text-uppercase mb-0">Minutes</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row g-4 mb-4">
+                            <div class="col-sm-6">{{ cuisine }}</div>
+                            <div class="col-sm-6">{{ link }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Recipe End -->
+        
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a class="border-bottom">Mystery Recipe</a>, All Right Reserved.
+							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+							Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/counterup/counterup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/tempusdominus/js/moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

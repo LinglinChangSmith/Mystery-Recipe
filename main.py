@@ -131,9 +131,8 @@ def random_recipe():
     title = data["recipes"][0]["title"]
     preparation = data["recipes"][0]["readyInMinutes"]
     servings = data["recipes"][0]["servings"]
-    diets = data["recipes"][0]["diets"]
+    cuisine = data["recipes"][0]["cuisines"]
     link = data["recipes"][0]["spoonacularSourceUrl"]
-    dishes = data["recipes"][0]["dishTypes"]
     note = "Write down something if you need to."
 
     add_new_recipe = Recipe(recipe_name=title, recipe_link=link, user_id=current_user.id, recipe_note=note)
@@ -143,9 +142,8 @@ def random_recipe():
     return render_template('random_recipe.html', title=title,
                            preparation=preparation,
                            servings=servings,
-                           diets=diets,
-                           link=link,
-                           dishes=dishes)
+                           cuisine=cuisine,
+                           link=link)
 
 
 @app.route("/myrecipes")
