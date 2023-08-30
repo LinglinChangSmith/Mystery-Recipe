@@ -82,6 +82,13 @@
                 </div>
             </div>
         </div>
+        <div>
+            {% for recipe_data in all_recipe_data: %}
+                <a href="{{ recipe_data.recipe_link }}">{{ recipe_data.recipe_name }}</a>
+                <a class="btn" href="{{ url_for('delete', id=recipe_data.id) }}">Delete</a>
+                <a class="btn" href="{{ url_for('update', id=recipe_data.id) }}">My Note</a><br>
+            {% endfor %}
+        </div>
         <!-- Favorite Recipe End -->
 
 
