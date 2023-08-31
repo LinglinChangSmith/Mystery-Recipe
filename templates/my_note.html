@@ -83,7 +83,13 @@
             </div>
         </div>
         <div class="container-xxl py-5">
-
+            <form method="POST" action="/update/{{ note_to_update.id }}">
+		        <h2>Recipe name: {{ name }}</h2>
+		        <p>Note:</p>
+		        {{ form.note(class="form-control", value=note_to_update.recipe_note) }}
+		        <br>
+		        <button class="btn btn-primary py-sm-3 px-sm-5 me-3" type="submit">Update</button>
+	        </form>
         </div>
         <!-- Favorite Recipe End -->
 
@@ -126,25 +132,3 @@
 </body>
 
 </html>
-
-
-
-
-<!--{% block content %}-->
-<!--<div class="container">-->
-<!--	<h1>My Note</h1>-->
-
-<!--	<form method="POST" action="/update/{{ note_to_update.id }}">-->
-<!--		<h2>Recipe title: {{ name }}</h2>-->
-<!--		<p>My note is:</p>-->
-<!--		{{ form.note(class="form-control", value=note_to_update.recipe_note) }}-->
-<!--		<br>-->
-<!--		<button class="btn" type="submit">Update</button>-->
-<!--	</form>-->
-<!--</div>-->
-
-<!--<div class="container">-->
-<!--	<a href="{{ url_for('my_recipes') }}" class="btn">Back to my recipes</a>-->
-<!--</div>-->
-
-<!--{% endblock %}-->
