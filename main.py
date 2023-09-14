@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 # Terminal: pip3 install -U Flask-SQLAlchemy
 from flask_bootstrap import Bootstrap
@@ -11,7 +11,6 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from werkzeug.security import generate_password_hash, check_password_hash
 import spoonacular as sp
 import creds
-from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
 
 api = sp.API(creds.MY_API_KEY)
 
