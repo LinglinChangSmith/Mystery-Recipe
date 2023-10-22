@@ -6,19 +6,17 @@ from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField
 from wtforms.validators import InputRequired, Email, Length, DataRequired
-import email_validator
 # Terminal: pip3 install flask-login
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import spoonacular as sp
 import creds
-import os
 
 api = sp.API(creds.MY_API_KEY)
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = creds.SECRET_KEY
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DB_URI", "sqlite:///user-info.db")
+app.config["SQLALCHEMY_DATABASE_URI"] = creds.DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.app_context().push()
 Bootstrap(app)
