@@ -74,9 +74,9 @@ def home():
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     form = SignupForm()
-    form.validate_on_submit()
+    form.is_submitted()
 
-    if form.validate_on_submit():
+    if form.is_submitted() and form.validate():
         hashed_password = generate_password_hash(form.password.data, method="sha256")
         user = User.query.filter_by(username=form.username.data).first()
         email = User.query.filter_by(email=form.email.data).first()
@@ -96,7 +96,7 @@ def signup():
 def login():
     form = LoginForm()
 
-    if form.validate_on_submit():
+    if form.is_submitted() and form.validate():
         user = User.query.filter_by(username=form.username.data).first()
         if user:
             if check_password_hash(user.password, form.password.data):
@@ -180,4 +180,4 @@ def trivia():
 
 
 if __name__ == "__main__":
-    app.run(debug=False, port=8000)
+    app.run(debug=True, port=8000)
