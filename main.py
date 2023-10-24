@@ -12,13 +12,12 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from werkzeug.security import generate_password_hash, check_password_hash
 import spoonacular as sp
 import creds
-import os
 
 api = sp.API(creds.MY_API_KEY)
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = creds.SECRET_KEY
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DB_URI", "sqlite:///user-info.db")
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///user-info.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.app_context().push()
 Bootstrap(app)
